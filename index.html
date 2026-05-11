@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Civics · MCAS Spring 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;650;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+
+const questions = [
+  {
+    id: 1,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    parts: [
+      {
+        prompt: "Individuals have many rights and responsibilities as citizens of the United States. Which of the following activities best describes a <strong>right</strong> of citizens?",
+        options: { A: "Paying taxes", B: "Obeying traffic laws", C: "Practicing a religion" },
+        answer: "C",
+        explanation: "A <em>right</em> is something citizens are free to do — the government cannot take it away. Practicing a religion is protected by the First Amendment. Paying taxes and obeying traffic laws are <em>responsibilities</em> — things citizens are legally required to do."
+      },
+      {
+        prompt: "Which of the following pairs of activities best describes <strong>responsibilities</strong> of citizens?",
+        options: { A: "Paying taxes and obeying traffic laws", B: "Practicing a religion and paying taxes", C: "Obeying traffic laws and practicing a religion" },
+        answer: "A",
+        explanation: "Responsibilities are civic obligations — things citizens must do. Paying taxes funds government services and obeying traffic laws keeps people safe. Both are legal obligations, not personal freedoms."
+      }
+    ]
+  },
+  {
+    id: 2,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    context: "Read and examine Source 1 before answering.",
+    sources: [
+      { title: "Source 1: March on Washington photograph", src: "sources/q02-source1-march-on-washington.png", alt: "Photograph of participants in the 1963 March on Washington." }
+    ],
+    parts: [
+      {
+        prompt: "Which of the following best describes the actions of the individuals in Source 1?",
+        options: { A: "They are voting.", B: "They are protesting.", C: "They are celebrating." },
+        answer: "B",
+        explanation: "The March on Washington was a large public demonstration where people gathered to demand civil rights legislation. Marching with signs to influence government action is protesting — not voting (which happens at polling places) or celebrating."
+      },
+      {
+        prompt: "Which of the following best explains <strong>why</strong> the individuals in Source 1 are participating in the 1963 March on Washington?",
+        options: { A: "To elect a candidate", B: "To show support for a cause", C: "To raise money for an election" },
+        answer: "B",
+        explanation: "The marchers were there to publicly demonstrate their support for civil rights legislation that Congress was considering. Peaceful public assembly is a constitutional right used to show support for a cause and pressure elected officials."
+      }
+    ]
+  },
+  {
+    id: 3,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    context: "Read and examine the civil rights report excerpt before answering.",
+    sources: [
+      { title: "Civil rights report excerpt", src: "sources/q03-civil-rights-report.png", alt: "Excerpt from a civil rights group report about the 1964 Civil Rights Bill." }
+    ],
+    parts: [
+      {
+        prompt: "Which of the following sentences from the report <strong>best</strong> shows that citizens and legislators worked together?",
+        options: {
+          A: "\"Plans for successful Senate consideration of the Civil Rights Bill have been completed.\"",
+          B: "\"At this time, there is no reason to believe that the promise to take up the Civil Rights Bill will be broken.\"",
+          C: "\"Senators . . . have agreed upon an effective and continuous [communication] with civil rights organizations.\"",
+          D: "\"A great many statements are being made about whether the House passed bill should or should not be amended.\""
+        },
+        answer: "C",
+        explanation: "Option C directly names both groups — Senators (legislators) and civil rights organizations (citizens) — and describes them working together through ongoing communication. The other options only reference legislative activity without mentioning citizen involvement."
+      }
+    ]
+  },
+  {
+    id: 4,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "CR",
+    context: "Read and examine Source 3 before answering.",
+    sources: [
+      { title: "Source 3: Representative Adam Clayton Powell Jr.", src: "sources/q04-source3-powell.png", alt: "Summary of Representative Adam Clayton Powell Jr.'s work in the U.S. House of Representatives." }
+    ],
+    prompt: "Based on the information in Source 3, identify one leadership quality demonstrated by Representative Powell. Explain your reasoning.",
+    explanation: "<strong>Sample response:</strong> One leadership quality demonstrated by Representative Powell is <em>perseverance</em>. Even though he faced criticism from his own political party and the press, he continued to fight for civil rights legislation throughout his career. This shows he was willing to stand by his convictions even when it was difficult.<br><br>Another valid quality is <em>collaboration</em> — he worked with members of Congress, civil rights organizations, and two presidents to pass the Civil Rights Act of 1964, showing he could build coalitions across different groups to achieve a goal."
+  },
+  {
+    id: 5,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    context: "Read and examine Source 1 before answering.",
+    sources: [
+      { title: "Source 1: Gerald Ford and Jimmy Carter biographies", src: "sources/q05-source1-ford-carter-bios.png", alt: "Biographies of Gerald Ford and Jimmy Carter before the 1976 presidential election." }
+    ],
+    parts: [
+      {
+        prompt: "Based on Source 1, Gerald Ford and Jimmy Carter both had experience in which of the following types of jobs before running for president?",
+        options: { A: "Public service jobs", B: "Private service jobs", C: "Educational service jobs" },
+        answer: "A",
+        explanation: "Both Ford and Carter served in government roles (Congress, governor, state senate, Navy) — all forms of public service. While Carter also ran a farming business (private) and served on an education board, the shared experience clearly evident in both biographies is public service."
+      },
+      {
+        prompt: "Which of the following best explains why this experience is important for a U.S. president?",
+        options: { A: "It involves making decisions with politicians.", B: "It involves hiring workers for many companies.", C: "It involves carrying out policies that help citizens." },
+        answer: "C",
+        explanation: "The primary job of a president is to execute laws and policies that affect citizens. Public service experience — like being a governor or congressman — directly prepares a person for this by teaching them how government works and how policies impact people's lives."
+      }
+    ]
+  },
+  {
+    id: 6,
+    section: "State Performance Task",
+    topic: "Government Structures",
+    type: "SR",
+    context: "Read and examine Sources 1 and 2 before answering.",
+    sources: [
+      { title: "Source 1: Candidate biographies", src: "sources/q05-source1-ford-carter-bios.png", alt: "Biographies of Gerald Ford and Jimmy Carter before the 1976 presidential election." },
+      { title: "Source 2: Republican and Democratic positions", src: "sources/q06-source2-party-positions.png", alt: "Table comparing Republican and Democratic positions on role of government, economy, and transportation." }
+    ],
+    parts: [
+      {
+        prompt: "Based on Sources 1 and 2, which of the following policies would Gerald Ford most likely have supported in the 1976 presidential campaign?",
+        options: {
+          A: "Creating new federal rules to regulate the economy",
+          B: "Providing funding for more train and bus routes in cities",
+          C: "Raising taxes on companies that sell products in multiple states",
+          D: "Allowing each state to make its own laws to prevent air and water pollution"
+        },
+        answer: "D",
+        explanation: "Ford was the Republican candidate, and the Republican position favored giving more power to state/local governments (not the federal government). Option D — letting each state make its own environmental laws — aligns with that belief. Options A and C involve increasing federal power and taxes, which contradict Republican positions. Option B (public transit) matched the Democratic platform."
+      }
+    ]
+  },
+  {
+    id: 7,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "CR",
+    context: "Read and examine Source 3 and the campaign visits table before answering.",
+    sources: [
+      { title: "Source 3: 1976 election results and map", src: "sources/q07-source3-election-results-map.png", alt: "1976 presidential election results, congressional party tables, and electoral map." },
+      { title: "Campaign visits table", src: "sources/q07-campaign-visits-table.png", alt: "Table showing states visited by Gerald Ford and Jimmy Carter during the 1976 campaign." }
+    ],
+    prompt: "Using the information in Source 3, explain one reason it was important for the candidates to visit different states during the presidential campaign.",
+    explanation: "<strong>Sample response:</strong> It was important for candidates to visit different states because each state has a different number of electoral votes, and a candidate needs to win enough electoral votes to win the presidency. For example, Carter visited Texas 9 times — Texas had 26 electoral votes, making it a high-priority state. By campaigning in states with many electoral votes, candidates can build the 270 votes needed to win. Visiting also allows candidates to connect directly with voters and win their support."
+  },
+  {
+    id: 8,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    context: "Read and examine the school nutrition sources before answering.",
+    sources: [
+      { title: "Sources 1–2: School nutrition and public comments", src: "sources/q08-source1-2-school-nutrition-comments.png", alt: "Food and Nutrition Service background and public comments on proposed school nutrition rules." },
+      { title: "Source 3: Policy organization findings", src: "sources/q10-source3-policy-organizations.png", alt: "Policy organization research findings about school nutrition programs." }
+    ],
+    parts: [
+      {
+        prompt: "Based on the sources, which of the following best describes the role of citizens when the new nutritional guideline rules were proposed?",
+        options: {
+          A: "Citizens created additional rules.",
+          B: "Citizens protested against the rules.",
+          C: "Citizens provided opinions that influenced the rules.",
+          D: "Citizens became government workers to change the rules."
+        },
+        answer: "C",
+        explanation: "The Food and Nutrition Service invited the public to comment on the proposed rules — and citizens, farmers, and organizations all submitted opinions. This is the democratic process of public comment, where citizen input informs how a rule is finalized. Citizens didn't create the rules themselves or become government employees."
+      }
+    ]
+  },
+  {
+    id: 9,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    context: "Read and examine the school nutrition rules diagram before answering.",
+    sources: [
+      { title: "School nutrition rules diagram", src: "sources/q09-nutrition-rules-diagram.png", alt: "Incomplete diagram showing steps in creating nutritional guideline rules for school meals." }
+    ],
+    parts: [
+      {
+        prompt: "Which of the following <strong>best</strong> completes the diagram?",
+        options: {
+          A: "Interest groups support legislation to help farmers grow healthier foods.",
+          B: "Citizens vote to increase the amount of money schools can spend on healthy meals.",
+          C: "The judicial branch declares laws about school nutrition programs unconstitutional.",
+          D: "Organizations advocate for better nutrition in school meals to promote healthy lifestyles."
+        },
+        answer: "D",
+        explanation: "The missing step is what happens between the executive branch reviewing policies and the agency finalizing rules. Advocacy by organizations is a standard part of the public policy process — they push for change, which prompts the agency to act. Citizens don't directly vote on nutrition rules, and the judicial branch wasn't involved here."
+      }
+    ]
+  },
+  {
+    id: 10,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "CR",
+    context: "Read and examine Source 3 before answering.",
+    sources: [
+      { title: "Source 3: Policy organization findings", src: "sources/q10-source3-policy-organizations.png", alt: "Policy organization research findings about school nutrition programs." }
+    ],
+    prompt: "Explain one reason it is important to a democracy for policy organizations to provide information they collect to the federal government.",
+    explanation: "<strong>Sample response:</strong> It is important because in a democracy, government decisions should be based on the needs and interests of the people. Policy organizations conduct research and gather data — like the finding that 70% of parents support healthy guidelines — that the government might not have on its own. When the government has access to this evidence, it can make better-informed decisions that reflect what citizens actually want and need. This helps ensure that public policy is fair, effective, and truly serves the common good."
+  },
+  {
+    id: 11,
+    section: "State Performance Task",
+    topic: "Rights & Responsibilities",
+    type: "CR",
+    context: "A group of students gathered in front of city hall to protest budget cuts to the school’s music department. Students brought instruments, microphones, and speakers. They started playing music to show support for the school’s music department.<br><br>A city official approached one of the students and said that protests that make loud noise require a city permit by law. The student said the group did not know they needed a permit and wanted to continue because their actions were peaceful.<br><br>The official explained that it was after 8:00 p.m., people nearby were complaining about the loud noise, and the group could come back another day with a permit. The student explained that the city council was voting on the music budget that night, so it was important to continue protesting now. The official said the fine for protesting without the required permit was $500.00, or the group could appear in court to argue its case.",
+    parts: [
+      { part: "A", prompt: "Explain why a law requiring a permit to protest might <strong>restrict individual rights</strong>." },
+      { part: "B", prompt: "Explain why a law requiring a permit to protest might <strong>support the common good</strong>." },
+      { part: "C", prompt: "Explain why democratic governments need to <strong>balance individual rights with the common good</strong>." },
+      { part: "D", prompt: "Describe one action, <strong>besides protesting</strong>, that the students could take to promote changing the law." }
+    ],
+    explanation: "<strong>Sample responses:</strong><br><br><strong>Part A (Restricts rights):</strong> The First Amendment gives citizens the right to free speech and peaceful assembly. A permit requirement means the government controls when and how people can protest. The students couldn't protest on the most important night because they lacked a permit, which limits their ability to be heard at the critical moment.<br><br><strong>Part B (Supports common good):</strong> The permit law protects nearby residents from disruptive noise, especially late at night. The common good means considering the wellbeing of all community members, not just the protesters. A permit process lets the city plan for protests so they don't disrupt others.<br><br><strong>Part C (Balance):</strong> Democracies must protect both individual freedoms and the welfare of the whole community. If individual rights are unlimited, one group's actions can harm others. If the government restricts rights too much, people lose their freedom to participate in democracy. Balance ensures both can coexist.<br><br><strong>Part D (Other action):</strong> The students could contact their city council representatives by writing letters or emails, attend the council meeting and speak during the public comment period, start a petition and collect community signatures, or work with local media to raise awareness about the issue."
+  },
+  {
+    id: 12,
+    section: "End-of-Course Test",
+    topic: "Foundations of Government",
+    type: "SR",
+    context: "Political characteristics of the ancient Roman Republic influenced the Founders of the U.S. government when they created the three branches of government.",
+    parts: [
+      {
+        prompt: "Roman characteristic: <em>\"Two consuls were elected to lead the military and government.\"</em><br><br>Which branch of the U.S. government was most influenced by this?",
+        options: { A: "The legislative branch", B: "The executive branch", C: "The judicial branch" },
+        answer: "B",
+        explanation: "Two elected consuls who led the military and government most closely resembles the President — the head of the executive branch, who is commander-in-chief and leads the government. The dual consul system also inspired the idea of having checks within leadership."
+      },
+      {
+        prompt: "Roman characteristic: <em>\"Citizens participated in assemblies where they voted to create laws.\"</em><br><br>Which branch of the U.S. government was most influenced by this?",
+        options: { A: "The legislative branch", B: "The executive branch", C: "The judicial branch" },
+        answer: "A",
+        explanation: "Citizens voting to create laws directly mirrors the legislative branch — Congress (Senate and House of Representatives) — whose primary job is to pass laws. The Roman assemblies are a forerunner of representative democracy."
+      },
+      {
+        prompt: "Roman characteristic: <em>\"Eight men were chosen each year to make decisions about disagreements between Roman citizens.\"</em><br><br>Which branch of the U.S. government was most influenced by this?",
+        options: { A: "The legislative branch", B: "The executive branch", C: "The judicial branch" },
+        answer: "C",
+        explanation: "Making decisions about disagreements between citizens is the core function of courts — the judicial branch. The U.S. Supreme Court's nine justices are the modern equivalent of these Roman judicial decision-makers."
+      }
+    ]
+  },
+  {
+    id: 13,
+    section: "End-of-Course Test",
+    topic: "Government Structures",
+    type: "SR",
+    context: "The Department of Homeland Security is a part of the federal government responsible for public safety and is part of the executive branch.",
+    parts: [
+      {
+        prompt: "The U.S. Congress passes a law related to public safety and the Department of Homeland Security carries out the law. This scenario is an example of which of the following?",
+        options: { A: "Federalism", B: "Judicial review", C: "Individual rights", D: "Separation of powers" },
+        answer: "D",
+        explanation: "Separation of powers means different branches have different jobs. Here, Congress (legislative branch) makes the law, and the Department of Homeland Security under the President (executive branch) carries it out. These are two separate branches doing their distinct roles — that's separation of powers."
+      },
+      {
+        prompt: "Which of the following parts of the federal government includes the Secretary of Homeland Security?",
+        options: { A: "The Cabinet", B: "The Supreme Court", C: "A Senate committee", D: "A House of Representatives committee" },
+        answer: "A",
+        explanation: "The Cabinet is made up of the heads (secretaries) of the major executive branch departments, including Homeland Security, Defense, State, etc. They advise the President. The Supreme Court is judicial, and Senate/House committees are legislative."
+      }
+    ]
+  },
+  {
+    id: 14,
+    section: "End-of-Course Test",
+    topic: "Government Structures",
+    type: "SR",
+    context: "Read and examine the town school timeline before answering.",
+    sources: [
+      { title: "Town school timeline", src: "sources/q14-source-town-school-timeline.png", alt: "Timeline outlining a town's plan to build a new school from 2017 to 2022." }
+    ],
+    parts: [
+      {
+        prompt: "Which form of government is best illustrated by the information in the timeline?",
+        options: { A: "Oligarchy", B: "Monarchy", C: "Democracy", D: "Confederacy" },
+        answer: "C",
+        explanation: "The timeline shows a democracy in action: the community was involved in discussions (town meeting), and citizens voted in an election to approve the school. In a democracy, the people have a say in government decisions. An oligarchy is ruled by a few, a monarchy by one ruler, and a confederacy is a structure of loosely allied states."
+      }
+    ]
+  },
+  {
+    id: 15,
+    section: "End-of-Course Test",
+    topic: "Government Structures",
+    type: "SR",
+    context: "Read and examine the town school timeline before answering.",
+    sources: [
+      { title: "Town school timeline", src: "sources/q14-source-town-school-timeline.png", alt: "Timeline outlining a town's plan to build a new school from 2017 to 2022." }
+    ],
+    parts: [
+      {
+        prompt: "The new school in the timeline was most likely built using funds from which of the following?",
+        options: { A: "Taxes", B: "Loans", C: "Donations", D: "Corporations" },
+        answer: "A",
+        explanation: "Public schools and government infrastructure are funded by taxes — money collected from residents and businesses. A special town election was held, which typically includes a vote to approve a tax measure or bond. Donations and corporations don't fund public schools, and while bonds/loans are sometimes used, taxes are the primary source."
+      }
+    ]
+  },
+  {
+    id: 16,
+    section: "End-of-Course Test",
+    topic: "Government Structures",
+    type: "SR",
+    context: "Read and examine the town school timeline before answering.",
+    sources: [
+      { title: "Town school timeline", src: "sources/q14-source-town-school-timeline.png", alt: "Timeline outlining a town's plan to build a new school from 2017 to 2022." }
+    ],
+    parts: [
+      {
+        prompt: "Middle school students could have had the most direct involvement in the decision-making process during which of the following parts of the timeline?",
+        options: {
+          A: "November 2017: A town proposes a project to build a new school.",
+          B: "January 2019: A town meeting is held to discuss the project with the community.",
+          C: "March 2019: A special town election is held at polling locations.",
+          D: "February 2020: Construction on the school begins."
+        },
+        answer: "B",
+        explanation: "A town meeting is open to the whole community — including students — to speak, ask questions, and share opinions. Middle schoolers are too young to vote in the March election (Option C). They wouldn't be involved in the initial proposal (A), and construction (D) is already decided. The town meeting is where anyone in the community, including young people, can directly participate."
+      }
+    ]
+  },
+  {
+    id: 17,
+    section: "End-of-Course Test",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    context: "Read and examine the Tinker v. Des Moines text before answering.",
+    sources: [
+      { title: "Tinker v. Des Moines text", src: "sources/q17-source-tinker-des-moines.png", alt: "Text describing the U.S. Supreme Court case Tinker v. Des Moines." }
+    ],
+    parts: [
+      {
+        prompt: "Which of the following parts of the U.S. Constitution <strong>best</strong> supports the Supreme Court's decision in this case?",
+        options: {
+          A: "The commerce clause, because it allows students to purchase armbands",
+          B: "The First Amendment, because it provides protections for free speech",
+          C: "The elastic clause, because it enables schools to create new rules to protect students",
+          D: "The Fifth Amendment, because it protects the rights of individuals to assemble peacefully"
+        },
+        answer: "B",
+        explanation: "Wearing armbands as silent protest is symbolic speech, protected by the First Amendment's free speech clause. The Supreme Court ruled that students don't shed their constitutional rights at the school door. The commerce clause covers trade, the elastic clause gives Congress broad lawmaking powers, and the Fifth Amendment covers due process and self-incrimination — none apply here."
+      }
+    ]
+  },
+  {
+    id: 18,
+    section: "End-of-Course Test",
+    topic: "Rights & Responsibilities",
+    type: "SR",
+    context: "Read and examine the political cartoon before answering.",
+    sources: [
+      { title: "The Need for a Flexible Constitution", src: "sources/q18-source-flexible-constitution-cartoon.png", alt: "Political cartoon showing a flexible constitution as a bending palm tree and an inflexible constitution as a broken rigid tree." }
+    ],
+    parts: [
+      {
+        prompt: "Which part of the Constitution <strong>best</strong> supports the idea illustrated in this cartoon?",
+        options: {
+          A: "\"The Congress shall have the Power . . . To make all Laws which shall be necessary and proper . . .\" (Article 1)",
+          B: "\"The executive Power shall be vested in a President of the United States of America. . . .\" (Article 2)",
+          C: "\"The judicial Power of the United States, shall be vested in one supreme Court. . . .\" (Article 3)",
+          D: "\"This Constitution . . . shall be the supreme Law of the Land . . .\" (Article 6)"
+        },
+        answer: "A",
+        explanation: "The cartoon argues the Constitution must be flexible to survive. The 'necessary and proper' clause (the elastic clause) in Article 1 gives Congress the power to make laws beyond those specifically listed — it stretches to fit new situations, making the Constitution adaptable. Articles 2, 3, and 6 define specific powers and supremacy, but don't address flexibility."
+      }
+    ]
+  },
+  {
+    id: 19,
+    section: "End-of-Course Test",
+    topic: "Foundations of Government",
+    type: "SR",
+    context: "Read and examine the Magna Carta excerpt before answering.",
+    sources: [
+      { title: "Magna Carta excerpt", src: "sources/q19-source-magna-carta.png", alt: "Excerpt describing rights outlined in the Magna Carta." }
+    ],
+    parts: [
+      {
+        prompt: "Which of the following rights in the U.S. Constitution is <strong>most</strong> related to the protections described in this excerpt?",
+        options: { A: "Right to vote", B: "Right to free speech", C: "Right to due process", D: "Right to own property" },
+        answer: "C",
+        explanation: "The Magna Carta passage says no one can be imprisoned or punished except through lawful judgment — i.e., a fair legal process. This is the foundation of due process, protected by the 5th and 14th Amendments. Due process means the government must follow fair legal procedures before depriving someone of life, liberty, or property."
+      }
+    ]
+  },
+  {
+    id: 20,
+    section: "End-of-Course Test",
+    topic: "Foundations of Government",
+    type: "SR",
+    context: "During the American Revolution, enslaved people used key ideas from the Declaration of Independence to argue for their freedom. James Armistead Lafayette was an enslaved person who petitioned for his freedom in 1786, after serving as a spy for the Continental Army during the Revolution.",
+    parts: [
+      {
+        prompt: "Which of the following is an idea from the Declaration of Independence that was most likely used in Lafayette's petition?",
+        options: {
+          A: "Governments must show courage.",
+          B: "Governments depend on war heroes.",
+          C: "All people have the right to change their constitution.",
+          D: "All people have natural rights that they are born with."
+        },
+        answer: "D",
+        explanation: "The Declaration of Independence states that all men are created equal and endowed with unalienable rights — life, liberty, and the pursuit of happiness. This idea of natural rights (rights you are born with) is exactly what enslaved people like Lafayette used to argue that slavery was unjust. Options A and B aren't ideas from the Declaration, and Option C misrepresents what it says."
+      }
+    ]
+  },
+  {
+    id: 21,
+    section: "End-of-Course Test",
+    topic: "Government Structures",
+    type: "SR",
+    context: "The U.S. Constitution gives the government the power to make an agreement with another country, known as a treaty. In 1918, during World War I, the president of the United States signed a peace treaty with other countries to end the war. The peace treaty was never ratified.",
+    parts: [
+      {
+        prompt: "Which of the following is a check on the powers of the president that explains why the peace treaty was not ratified?",
+        options: {
+          A: "The Senate voted to reject the peace treaty.",
+          B: "Citizens rejected the peace treaty in an election.",
+          C: "The Supreme Court declared the treaty unconstitutional.",
+          D: "State governments created a new peace treaty with other nations."
+        },
+        answer: "A",
+        explanation: "Under the Constitution, the President can negotiate treaties, but they must be ratified (approved) by a two-thirds vote of the Senate. This is a checks and balances mechanism — the legislative branch checks the executive branch's treaty-making power. This is exactly what happened in 1919 when the Senate rejected the Treaty of Versailles that President Wilson had signed."
+      }
+    ]
+  }
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+
+let currentQ = 0;
+let currentPart = 0;
+let score = 0;
+let answered = false;
+let selectedOption = null;
+let results = [];
+
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+
+function getActivePart() {
+  const q = questions[currentQ];
+  if (q.type === "CR") return null;
+  if (!q.parts) return q;
+  return q.parts[currentPart];
+}
+
+function isLastPartOfQuestion() {
+  const q = questions[currentQ];
+  if (q.type === "CR") return true;
+  if (!q.parts) return true;
+  return currentPart >= q.parts.length - 1;
+}
+
+function isLastQuestion() {
+  return currentQ >= questions.length - 1 && isLastPartOfQuestion();
+}
+
+function totalSRParts() {
+  let count = 0;
+  questions.forEach(q => {
+    if (q.type === "SR") count += q.parts ? q.parts.length : 1;
+  });
+  return count;
+}
+
+function progressPercent() {
+  let done = 0, total = 0;
+  questions.forEach((q, qi) => {
+    const parts = q.parts ? q.parts.length : 1;
+    total += parts;
+    if (qi < currentQ) done += parts;
+    else if (qi === currentQ) done += currentPart;
+  });
+  return Math.round((done / total) * 100);
+}
+
+function partSuffix() {
+  const q = questions[currentQ];
+  if (!q.parts || q.parts.length === 1) return "";
+  return ` · Part ${String.fromCharCode(65 + currentPart)}`;
+}
+
+
+function escapeAttr(value) {
+  return String(value || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function renderSupportMaterial(q) {
+  if (q.sources && q.sources.length) {
+    const buttons = q.sources.map((source, i) => `
+      <button class="source-chip" onclick="openSource(${i})">
+        <span class="source-chip-kicker">${q.sources.length > 1 ? 'Source ' + (i + 1) : 'Source'}</span>
+        <span class="source-chip-title">${source.title}</span>
+      </button>
+    `).join("");
+    return `
+      <div class="source-panel">
+        <div class="source-panel-text">${q.context || 'Read and examine the source before answering.'}</div>
+        <div class="source-chip-row">${buttons}</div>
+      </div>
+    `;
+  }
+  if (q.context) {
+    return `<div class="context-box"><strong>Context:</strong> ${q.context}</div>`;
+  }
+  return "";
+}
+
+// ─────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────
+
+function render() {
+  const q = questions[currentQ];
+  const part = getActivePart();
+  const progress = progressPercent();
+
+  let html = `
+    <div class="header">
+      <div class="header-left">
+        <div class="title">Grade 8 Civics · MCAS Spring 2025</div>
+        <div class="subtitle">Massachusetts Dept. of Elementary &amp; Secondary Education</div>
+      </div>
+      <div class="score-badge">Score: ${score} / ${totalSRParts()}</div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" style="width:${progress}%"></div>
+    </div>
+    <div class="progress-label">Question ${currentQ + 1} of ${questions.length}${partSuffix()} &nbsp;·&nbsp; ${progress}% complete</div>
+
+    <div class="card">
+      <div class="card-top">
+        <span class="q-num">Q${q.id}</span>
+        <span class="badge badge-section">${q.section}</span>
+        <span class="badge badge-topic">${q.topic}</span>
+        <span class="badge badge-type ${q.type === 'CR' ? 'badge-cr' : ''}">${q.type === 'CR' ? 'Constructed Response' : 'Selected Response'}</span>
+      </div>
+
+      ${renderSupportMaterial(q)}
+  `;
+
+  if (q.type === "CR") {
+    if (q.parts) {
+      html += `<div class="cr-parts">`;
+      q.parts.forEach(p => {
+        html += `
+          <div class="cr-part">
+            <div class="cr-part-label">Part ${p.part}</div>
+            <div class="cr-prompt">${p.prompt}</div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div class="cr-prompt">${q.prompt}</div>`;
+    }
+
+    html += `
+      <div class="cr-builder">
+        <div class="cr-builder-title">Build your response</div>
+        <ul>
+          <li>Answer every part of the question.</li>
+          <li>Use evidence from the source or scenario when the question asks for it.</li>
+          <li>Explain your reasoning in your own words.</li>
+        </ul>
+        <textarea class="cr-draft" placeholder="Draft your response here, or write it on paper."></textarea>
+      </div>
+      <div class="card-actions">
+        <button class="btn-secondary" onclick="showExplanation()">See Sample Response</button>
+        <button class="btn-primary" onclick="advance()">${isLastQuestion() ? "See Results" : "Mark Complete"}</button>
+      </div>
+    `;
+  } else {
+    // SR question
+    const prompt = part.prompt;
+    const options = part.options;
+    const correctAnswer = part.answer;
+
+    html += `<div class="sr-prompt">${prompt}</div><div class="options">`;
+
+    Object.entries(options).forEach(([key, val]) => {
+      let cls = "option";
+      let icon = "";
+      if (answered) {
+        if (key === correctAnswer) {
+          cls += " option-correct";
+          icon = `<span class="option-icon correct-icon">✓</span>`;
+        } else if (key === selectedOption) {
+          cls += " option-wrong";
+          icon = `<span class="option-icon wrong-icon">✗</span>`;
+        } else {
+          cls += " option-dimmed";
+        }
+      }
+      html += `
+        <button class="${cls}" onclick="selectOption('${key}')" ${answered ? "disabled" : ""}>
+          <span class="option-key">${key}</span>
+          <span class="option-text">${val}</span>
+          ${icon}
+        </button>
+      `;
+    });
+
+    html += `</div>`;
+
+    if (answered) {
+      const wasCorrect = selectedOption === correctAnswer;
+      html += `
+        <div class="feedback ${wasCorrect ? 'feedback-correct' : 'feedback-wrong'}">
+          ${wasCorrect
+            ? `<strong>Correct.</strong> Well done.`
+            : `<strong>Incorrect.</strong> The correct answer is <strong>${correctAnswer}: ${options[correctAnswer]}</strong>.`
+          }
+        </div>
+        <div class="card-actions">
+          <button class="btn-secondary" onclick="showExplanation()">See Explanation</button>
+          <button class="btn-primary" onclick="advance()">${isLastQuestion() ? "See Results →" : "Next →"}</button>
+        </div>
+      `;
+    }
+  }
+
+  html += `</div>`; // end .card
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function renderResults() {
+  const total = totalSRParts();
+  const pct = Math.round((score / total) * 100);
+
+  let breakdown = `<div class="results-breakdown">`;
+  results.forEach(r => {
+    if (r.type === "CR") {
+      breakdown += `
+        <div class="result-row result-completed">
+          <span class="result-icon">✓</span>
+          <span class="result-qid">Q${r.qId}</span>
+          <span class="result-topic">${r.topic}</span>
+          <span class="result-status">Completed · not auto-scored</span>
+        </div>
+      `;
+    } else {
+      breakdown += `
+        <div class="result-row ${r.correct ? 'result-correct' : 'result-wrong'}">
+          <span class="result-icon">${r.correct ? '✓' : '✗'}</span>
+          <span class="result-qid">Q${r.qId}${r.partLabel ? ' · ' + r.partLabel : ''}</span>
+          <span class="result-topic">${r.topic}</span>
+          <span class="result-status">${r.correct ? 'Correct' : `Correct: ${r.correctAnswer}`}</span>
+        </div>
+      `;
+    }
+  });
+  breakdown += `</div>`;
+
+  document.getElementById("app").innerHTML = `
+    <div class="header">
+      <div class="header-left">
+        <div class="title">Grade 8 Civics · MCAS Spring 2025</div>
+        <div class="subtitle">Quiz Complete</div>
+      </div>
+    </div>
+    <div class="card results-card">
+      <h2>Quiz Complete!</h2>
+      <div class="big-score">${score} <span class="big-score-denom">/ ${total}</span></div>
+      <div class="big-pct">${pct}%</div>
+      <p class="results-summary">
+        ${pct >= 80 ? "Excellent work. You have a strong grasp of Grade 8 Civics." :
+          pct >= 60 ? "Good effort. Review the questions you missed and try again." :
+          "Keep studying. Review the explanations for each question to strengthen your understanding."}
+      </p>
+      ${breakdown}
+      <button class="btn-primary" onclick="restart()" style="margin-top:24px">Restart Quiz</button>
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────────
+// ACTIONS
+// ─────────────────────────────────────────────
+
+function selectOption(key) {
+  if (answered) return;
+  answered = true;
+  selectedOption = key;
+
+  const q = questions[currentQ];
+  const part = getActivePart();
+  const correctAnswer = part.answer;
+  const options = part.options;
+  const wasCorrect = key === correctAnswer;
+
+  if (wasCorrect) score++;
+
+  results.push({
+    qId: q.id,
+    partLabel: q.parts && q.parts.length > 1 ? `Part ${String.fromCharCode(65 + currentPart)}` : null,
+    topic: q.topic,
+    correct: wasCorrect,
+    correctAnswer: `${correctAnswer}`
+  });
+
+  render();
+}
+
+function advance() {
+  const q = questions[currentQ];
+  if (q.type === "CR" && !results.some(r => r.qId === q.id && r.type === "CR")) {
+    results.push({ qId: q.id, topic: q.topic, type: "CR", completed: true });
+  }
+  if (!isLastPartOfQuestion()) {
+    currentPart++;
+    answered = false;
+    selectedOption = null;
+    render();
+    return;
+  }
+  if (isLastQuestion()) {
+    renderResults();
+    return;
+  }
+  currentQ++;
+  currentPart = 0;
+  answered = false;
+  selectedOption = null;
+  render();
+}
+
+function showExplanation() {
+  const q = questions[currentQ];
+  const part = getActivePart();
+  const expText = (part && part.explanation) ? part.explanation : q.explanation;
+  document.getElementById("modal-body").innerHTML = expText || "No explanation available.";
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+function openSource(index) {
+  const q = questions[currentQ];
+  if (!q.sources || !q.sources[index]) return;
+  const source = q.sources[index];
+  document.getElementById("source-title").textContent = source.title || "Source";
+  const img = document.getElementById("source-image");
+  img.src = source.src;
+  img.alt = source.alt || source.title || "Source image";
+  document.getElementById("source-modal").style.display = "flex";
+}
+
+function closeSourceModal() {
+  document.getElementById("source-modal").style.display = "none";
+}
+
+function restart() {
+  currentQ = 0; currentPart = 0; score = 0;
+  answered = false; selectedOption = null; results = [];
+  render();
+}
+
+document.addEventListener("click", e => {
+  if (e.target === document.getElementById("modal")) closeModal();
+  if (e.target === document.getElementById("source-modal")) closeSourceModal();
+});
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+
+// Inject modal once
+document.body.insertAdjacentHTML("beforeend", `
+  <div id="modal" class="app-modal" style="display:none">
+    <div class="modal-box explanation-box">
+      <div class="modal-header">
+        <strong>Explanation</strong>
+        <button onclick="closeModal()" class="modal-close" aria-label="Close explanation">×</button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+  <div id="source-modal" class="app-modal" style="display:none">
+    <div class="modal-box source-box">
+      <div class="modal-header source-header">
+        <strong id="source-title">Source</strong>
+        <button onclick="closeSourceModal()" class="modal-close" aria-label="Close source">×</button>
+      </div>
+      <div class="source-modal-body">
+        <img id="source-image" src="" alt="" />
+      </div>
+    </div>
+  </div>
+`);
+
+render();
+</script>
+
+<!-- ── FUNCTIONAL STYLES — full design pass coming later ── -->
+<style>
+  :root {
+    --green: #16C47F;
+    --green-dark: #0BA86A;
+    --ink: #0E2A1D;
+    --ink-soft: #3C5A4B;
+    --mint: #E8F9F0;
+    --cream: #FFFDF7;
+    --white: #FFFFFF;
+    --border: #D9E7DF;
+    --border-soft: #EAF3EC;
+    --yellow: #FFC93C;
+    --red: #FF5A6A;
+    --red-soft: #FFE6E9;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: radial-gradient(circle at top, #F7FFF9 0, #FFFDF7 38%, #F4F1E8 100%);
+    color: var(--ink);
+    font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+  }
+
+  .header {
+    background: rgba(255,255,255,0.88);
+    color: var(--ink);
+    padding: 18px 22px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-soft);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    backdrop-filter: blur(12px);
+  }
+  .title { font-size: 1.08rem; font-weight: 850; letter-spacing: -0.02em; }
+  .subtitle { font-size: 0.76rem; color: var(--ink-soft); margin-top: 3px; font-weight: 700; }
+  .score-badge {
+    background: var(--mint);
+    color: var(--green-dark);
+    padding: 8px 13px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 850;
+    white-space: nowrap;
+    border: 1px solid var(--border);
+  }
+
+  .progress-bar-wrap { height: 12px; background: var(--border-soft); overflow: hidden; }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(180deg, #4ADE80 0%, var(--green) 100%);
+    border-radius: 0 999px 999px 0;
+    box-shadow: inset 0 4px 0 rgba(255,255,255,0.35);
+    transition: width 0.35s ease;
+  }
+  .progress-label {
+    text-align: right;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    padding: 7px 22px;
+    font-weight: 800;
+  }
+
+  .card {
+    background: var(--white);
+    max-width: 760px;
+    margin: 24px auto 40px;
+    border-radius: 24px;
+    box-shadow: 0 8px 0 var(--border), 0 18px 48px rgba(14,42,29,0.10);
+    padding: 26px;
+    border: 2px solid var(--border-soft);
+  }
+
+  .card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; }
+  .q-num { font-weight: 900; font-size: 0.9rem; color: var(--green-dark); }
+  .badge {
+    font-size: 0.7rem;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+  }
+  .badge-section { background: var(--mint); color: var(--green-dark); }
+  .badge-topic { background: #F4F8F5; color: var(--ink-soft); }
+  .badge-type { background: #FFF6DA; color: #936400; }
+  .badge-cr { background: #EAF4FF; color: #205C90; }
+
+  .context-box, .source-panel {
+    background: #F8FFF9;
+    border: 2px solid var(--border);
+    padding: 15px;
+    margin-bottom: 18px;
+    border-radius: 18px;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-weight: 650;
+  }
+  .source-panel-text { margin-bottom: 12px; color: var(--ink); font-weight: 800; }
+  .source-chip-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .source-chip {
+    border: 2px solid var(--green);
+    background: var(--white);
+    border-radius: 16px;
+    padding: 10px 12px;
+    box-shadow: 0 3px 0 var(--green-dark);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    max-width: 100%;
+  }
+  .source-chip-kicker { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 900; color: var(--green-dark); }
+  .source-chip-title { font-size: 0.9rem; font-weight: 850; color: var(--ink); }
+  .source-chip:hover { transform: translateY(-1px); }
+
+  .sr-prompt, .cr-prompt {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    margin-bottom: 18px;
+    color: var(--ink);
+    font-weight: 800;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 15px 16px;
+    border: 2px solid var(--border);
+    border-radius: 18px;
+    background: var(--white);
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.98rem;
+    font-family: inherit;
+    line-height: 1.4;
+    font-weight: 750;
+    color: var(--ink);
+    box-shadow: 0 3px 0 var(--border);
+    transition: transform 0.12s, border-color 0.12s, background 0.12s;
+  }
+  .option:hover:not(:disabled) { border-color: var(--green); background: #F5FFF8; transform: translateY(-1px); }
+  .option:disabled { cursor: default; }
+  .option-key {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    background: var(--mint);
+    color: var(--green-dark);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .option-text { flex: 1; padding-top: 4px; }
+  .option-icon { margin-left: auto; font-size: 1rem; flex-shrink: 0; }
+  .correct-icon { color: var(--green-dark); }
+  .wrong-icon { color: var(--red); }
+
+  .option-correct { border-color: var(--green) !important; background: #E6F8EF !important; box-shadow: 0 3px 0 var(--green-dark); }
+  .option-correct .option-key { background: var(--green); color: white; }
+  .option-wrong { border-color: var(--red) !important; background: var(--red-soft) !important; box-shadow: 0 3px 0 #D94454; }
+  .option-wrong .option-key { background: var(--red); color: white; }
+  .option-dimmed { opacity: 0.45; }
+
+  .feedback {
+    margin-top: 18px;
+    padding: 15px 16px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-weight: 800;
+  }
+  .feedback-correct { background: #E6F8EF; color: var(--green-dark); border: 2px solid var(--green); }
+  .feedback-wrong { background: var(--red-soft); color: #B83442; border: 2px solid var(--red); }
+
+  .card-actions { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-secondary, .btn-primary {
+    padding: 13px 18px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-family: inherit;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .btn-secondary { background: white; border: 2px solid var(--border); color: var(--ink-soft); box-shadow: 0 3px 0 var(--border); }
+  .btn-primary { background: var(--green); color: white; border: none; box-shadow: 0 4px 0 var(--green-dark); margin-left: auto; }
+  .btn-secondary:hover, .btn-primary:hover { transform: translateY(-1px); }
+
+  .cr-parts { display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px; }
+  .cr-part { padding: 16px; background: #F8FFF9; border-radius: 18px; border: 2px solid var(--border); }
+  .cr-part-label { font-size: 0.76rem; font-weight: 900; color: var(--green-dark); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .cr-builder { background: #FFFDF7; border: 2px dashed var(--border); border-radius: 18px; padding: 16px; margin-top: 16px; }
+  .cr-builder-title { font-weight: 900; color: var(--ink); margin-bottom: 8px; }
+  .cr-builder ul { margin: 0 0 12px 20px; padding: 0; color: var(--ink-soft); line-height: 1.5; font-weight: 700; }
+  .cr-draft { width: 100%; min-height: 130px; resize: vertical; border: 2px solid var(--border); border-radius: 16px; padding: 14px; font: inherit; color: var(--ink); }
+
+  .results-card { text-align: center; }
+  .results-card h2 { font-size: 1.6rem; color: var(--ink); margin-bottom: 10px; }
+  .big-score { font-size: 3.6rem; font-weight: 900; color: var(--green-dark); line-height: 1; }
+  .big-score-denom { font-size: 2rem; opacity: 0.45; }
+  .big-pct { font-size: 1.25rem; color: #936400; margin: 6px 0 14px; font-weight: 900; }
+  .results-summary { color: var(--ink-soft); font-size: 0.98rem; margin-bottom: 22px; font-weight: 700; }
+  .results-breakdown { text-align: left; display: flex; flex-direction: column; gap: 7px; }
+  .result-row { display: grid; grid-template-columns: 28px 80px 1fr 1.3fr; gap: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.86rem; align-items: center; font-weight: 800; }
+  .result-correct, .result-completed { background: #E6F8EF; color: var(--green-dark); }
+  .result-wrong { background: var(--red-soft); color: #B83442; }
+  .result-icon { font-weight: 900; }
+
+  .app-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(14,42,29,0.56);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 18px;
+  }
+  .modal-box {
+    background: white;
+    border-radius: 24px;
+    width: 100%;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 18px 70px rgba(14,42,29,0.28);
+    border: 2px solid var(--border-soft);
+    overflow: hidden;
+  }
+  .explanation-box { max-width: 640px; }
+  .source-box { max-width: 920px; }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; border-bottom: 1px solid var(--border-soft); font-size: 1rem; color: var(--ink); }
+  .modal-close { background: var(--mint); border: none; border-radius: 999px; width: 34px; height: 34px; font-size: 1.35rem; line-height: 1; cursor: pointer; color: var(--ink); }
+  .modal-body { padding: 20px; font-size: 0.96rem; line-height: 1.7; overflow-y: auto; color: var(--ink); }
+  .source-modal-body { padding: 12px; overflow: auto; background: #F4F1E8; }
+  .source-modal-body img { display: block; width: 100%; height: auto; border-radius: 14px; background: white; }
+
+  @media (max-width: 680px) {
+    .header { padding: 14px 16px 12px; }
+    .score-badge { font-size: 0.72rem; padding: 7px 10px; }
+    .card { margin: 16px 12px 32px; padding: 18px; border-radius: 22px; }
+    .result-row { grid-template-columns: 24px 64px 1fr; }
+    .result-status { grid-column: 3; }
+    .btn-primary { margin-left: 0; width: 100%; }
+    .btn-secondary { width: 100%; }
+    .source-chip { width: 100%; }
+    .app-modal { padding: 10px; align-items: stretch; }
+    .modal-box { max-height: 94vh; }
+  }
+</style>
+
+</body>
+</html>
